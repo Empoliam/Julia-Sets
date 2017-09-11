@@ -45,9 +45,7 @@ public class Main {
 					if(x == IMAGE_X/2) output.setRGB(x, y, Color.WHITE.getRGB());
 					if(y == IMAGE_Y/2) output.setRGB(x, y, Color.WHITE.getRGB());
 				}
-
 			}
-
 		}
 
 		File f = new File("julia" + l + ".png");
@@ -86,10 +84,8 @@ public class Main {
 				escape = k;
 				break;
 			}
-
 		}
 
 		return escape;
 	}
-
 }
