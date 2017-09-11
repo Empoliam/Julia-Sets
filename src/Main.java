@@ -5,8 +5,6 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-import org.apache.commons.math3.complex.Complex;
-
 public class Main {
 
 	static int ITERATIONS = 256;
@@ -20,14 +18,14 @@ public class Main {
 	static double r = -0.734;
 	static double i = 0.144;
 	
-	static Complex c = new Complex(r,i);
+	static Imaginary c = new Imaginary(r,i);
 
 	static BufferedImage output = new BufferedImage((int)IMAGE_X,(int)IMAGE_Y,BufferedImage.TYPE_INT_RGB);
 
 	public static void main(String args[])
 	{
 
-		for(int l = 0; l < 500; l++) {
+		for(int l = 0; l < 15; l++) {
 		
 		long START = System.nanoTime();
 
@@ -38,7 +36,7 @@ public class Main {
 				double real = ((x - ( IMAGE_X/2)) * (3 / IMAGE_X) / ZOOM) + CENTRE_X;
 				double img =  ((y - (IMAGE_Y/2)) * (3 / IMAGE_Y) / ZOOM) - CENTRE_Y;
 
-				int escape = check(new Complex(real,img));
+				int escape = check(new Imaginary(real,img));
 
 				if(escape == ITERATIONS+1) output.setRGB(x,y,0x000000);
 				else output.setRGB(x, y, new Color(escape%256,escape%256,0).getRGB());
@@ -68,13 +66,13 @@ public class Main {
 		i = Math.round(i*10000);
 		i = i/10000;
 		
-		c = new Complex(r,i);
+		c = new Imaginary(r,i);
 		
 		}
 		
 	}
 
-	static int check(Complex z)
+	static int check(Imaginary z)
 	{
 
 		int escape = ITERATIONS+1;
@@ -84,7 +82,7 @@ public class Main {
 			z = z.multiply(z);			
 			z = z.add(c);
 
-			if(z.getReal() > 2.0 || z.getImaginary() > 2.0){
+			if(z.r > 2.0 || z.i > 2.0){
 				escape = k;
 				break;
 			}
